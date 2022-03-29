@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import ViewTodos from "./containers/ViewTodos";
+import "./index.css";
 
-function App() {
+import { connect } from "react-redux";
+import { initTodos } from "./actions";
+import Modal from "./components/Modal";
+import Navbar from "./components/Navbar";
+
+function App({ dispatch }) {
+  const [showModal, setShowModal] = useState(false);
+
+  const fetchTodos = async () => {
+    const response = await fetch(
+      "https://virtserver.swaggerhub.com/hanabyan/todo/1.0.0/to-do-list"
+    );
+    return await response.json();
+  };
+
+  useEffect(() => {
+    const dispatchData = async () => {
+      const data = await fetchTodos();
+      return dispatch(initTodos(data));
+    };
+    dispatchData();
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar showModal={showModal} setShowModal={setShowModal} />
+      <div className="container mx-auto p-2">
+        <Modal showModal={showModal} setShowModal={setShowModal} />
+        <ViewTodos />
+      </div>
+    </>
   );
 }
 
-export default App;
+export default connect()(App);
