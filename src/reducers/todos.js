@@ -14,6 +14,14 @@ const todos = (state = [], action) => {
           createdAt: action.createdAt,
         },
       ];
+    case "UPDATE_TODO":
+      return state.map((itm) => {
+        if (itm.id !== action.id) {
+          return itm;
+        }
+        itm.status = 1;
+        return itm;
+      });
     case "DELETE_TODO":
       return state.filter((itm) => itm.id !== action.id);
     default:

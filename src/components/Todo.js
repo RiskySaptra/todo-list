@@ -32,7 +32,7 @@ const Todo = ({ dispatch, id, title, description, status, createdAt }) => {
       <DetailModal
         showModal={showModal}
         setShowModal={setShowModal}
-        data={{ title, description, createdAt, status }}
+        data={{ id, title, description, createdAt, status }}
       />
     </>
   );

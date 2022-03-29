@@ -1,6 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
+import { updateTodo } from "../actions";
 
-export default function DetailModal({ showModal, setShowModal, data }) {
+function DetailModal({ dispatch, showModal, setShowModal, data }) {
+  const dispatchData = () => {
+    return dispatch(updateTodo(data.id));
+  };
   return (
     <>
       {showModal ? (
@@ -13,10 +18,10 @@ export default function DetailModal({ showModal, setShowModal, data }) {
                 <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                   <h3 className="text-3xl font-semibold">{data.title}</h3>
                   <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    className="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setShowModal(false)}
                   >
-                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                    <span className="bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none">
                       ×
                     </span>
                   </button>
@@ -43,13 +48,15 @@ export default function DetailModal({ showModal, setShowModal, data }) {
                   >
                     Close
                   </button>
-                  <button
-                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Edit
-                  </button>
+                  {data.status === 0 && (
+                    <button
+                      className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={dispatchData}
+                    >
+                      Edit Sebagai Selesai
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -60,3 +67,5 @@ export default function DetailModal({ showModal, setShowModal, data }) {
     </>
   );
 }
+
+export default connect()(DetailModal);

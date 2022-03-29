@@ -12,10 +12,10 @@ export const addTodo = (data) => {
   };
 };
 
-export const updateTodo = (text) => {
+export const updateTodo = (id) => {
   return {
     type: "UPDATE_TODO",
-    text,
+    id,
   };
 };
 
