@@ -1,4 +1,5 @@
 const todos = (state = [], action) => {
+  console.log(state, action, "memeks");
   const newId = state.length > 1 ? state[state.length - 1].id : 0;
   switch (action.type) {
     case "FETCH_TODO":
@@ -14,24 +15,8 @@ const todos = (state = [], action) => {
           createdAt: action.createdAt,
         },
       ];
-    case "UPDATE_TODO":
-      return [
-        ...state,
-        {
-          id: action.id,
-          text: action.text,
-          completed: false,
-        },
-      ];
     case "DELETE_TODO":
-      return [
-        ...state,
-        {
-          id: action.id,
-          text: action.text,
-          completed: false,
-        },
-      ];
+      return state.filter((itm) => itm.id !== action.id);
     default:
       return state;
   }

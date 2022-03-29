@@ -8,16 +8,16 @@ const TodoList = ({ todos }) => {
       <div className="basis-1/2">
         <h3>Done</h3>
         <ul className="list-disc">
-          {todos.map((todo) => (
-            <>{todo.status === 1 && <Todo key={todo.id} {...todo} />}</>
+          {todos.map((todo, idx) => (
+            <div key={idx}>{todo.status === 1 && <Todo {...todo} />}</div>
           ))}
         </ul>
       </div>
       <div className="basis-1/2">
         <h3>Ongoing</h3>
         <ul className="list-disc">
-          {todos.map((todo) => (
-            <>{todo.status === 0 && <Todo key={todo.id} {...todo} />}</>
+          {todos.map((todo, idx) => (
+            <div key={idx}>{todo.status === 0 && <Todo {...todo} />}</div>
           ))}
         </ul>
       </div>

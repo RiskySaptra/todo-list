@@ -19,9 +19,9 @@ export const updateTodo = (text) => {
   };
 };
 
-export const deleteTodo = (text) => {
+export const deleteTodo = (id) => {
   return {
     type: "DELETE_TODO",
-    text,
+    id,
   };
 };

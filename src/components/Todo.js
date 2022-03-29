@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import DetailModal from "./DetailModal";
+import { connect } from "react-redux";
+import { deleteTodo } from "../actions";
 
-const Todo = ({ id, title, description, status, createdAt }) => {
+const Todo = ({ dispatch, id, title, description, status, createdAt }) => {
   const [showModal, setShowModal] = useState(false);
-  console.log(showModal, id, "test");
+  const dispatchData = () => {
+    return dispatch(deleteTodo(id));
+  };
   return (
     <>
       <li
@@ -13,6 +17,17 @@ const Todo = ({ id, title, description, status, createdAt }) => {
         }}
       >
         {title}
+        {status === 0 && (
+          <span className="inline ml-2">
+            <button
+              className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-2 py-1 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              onClick={dispatchData}
+            >
+              Delete
+            </button>
+          </span>
+        )}
       </li>
       <DetailModal
         showModal={showModal}
@@ -23,4 +38,4 @@ const Todo = ({ id, title, description, status, createdAt }) => {
   );
 };
 
-export default Todo;
+export default connect()(Todo);
