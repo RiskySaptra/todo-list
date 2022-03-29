@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import AddTodo from "./containers/AddTodo";
 import ViewTodos from "./containers/ViewTodos";
 import "./index.css";
 
 import { connect } from "react-redux";
 import { initTodos } from "./actions";
 import Modal from "./components/Modal";
+import Navbar from "./components/Navbar";
 
 function App({ dispatch }) {
   const [showModal, setShowModal] = useState(false);
@@ -25,11 +25,13 @@ function App({ dispatch }) {
     dispatchData();
   }, []);
   return (
-    <div className="container mx-auto p-2">
-      <AddTodo showModal={showModal} setShowModal={setShowModal} />
-      <Modal showModal={showModal} setShowModal={setShowModal} />
-      <ViewTodos />
-    </div>
+    <>
+      <Navbar showModal={showModal} setShowModal={setShowModal} />
+      <div className="container mx-auto p-2">
+        <Modal showModal={showModal} setShowModal={setShowModal} />
+        <ViewTodos />
+      </div>
+    </>
   );
 }
 
