@@ -23,7 +23,7 @@ function App({ dispatch }) {
       return dispatch(initTodos(data));
     };
     dispatchData();
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <Navbar showModal={showModal} setShowModal={setShowModal} />
