@@ -1,5 +1,4 @@
 const todos = (state = [], action) => {
-  console.log(state, action, "memeks");
   const newId = state.length > 1 ? state[state.length - 1].id : 0;
   switch (action.type) {
     case "FETCH_TODO":
